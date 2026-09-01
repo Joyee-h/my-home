@@ -1,131 +1,450 @@
 <!DOCTYPE html>
-<html lang="ko">
+<!-- no-js: JS 로드에 실패해도 내용이 보이도록 하는 대비 클래스 (main.js 가 제거) -->
+<html lang="ko" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이현조 - IT 전략기획 & MBA 컨설턴트</title>
+    <title>조이현 - IT 전략기획 & MBA 컨설턴트</title>
+
+    <!-- 검색엔진 / 링크 공유용 메타 정보 -->
+    <meta name="description" content="IT 전략기획자 조이현입니다. 경희대학교 경영대학원 경영컨설팅학과 MBA 재학 중이며, 기술과 비즈니스 전략의 교집합에서 가치를 만듭니다.">
+    <meta name="author" content="조이현">
+    <meta name="theme-color" content="#5b4fe9">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="조이현 - IT 전략기획 & MBA 컨설턴트">
+    <meta property="og:description" content="기술과 사람을 잇는 IT 전략기획자. 경희대학교 MBA 재학 중.">
+    <meta property="og:image" content="profile.jpg">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 파비콘 (외부 파일 없이 인라인 SVG 사용) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b4fe9'/%3E%3Cellipse cx='11.6' cy='10' rx='2.7' ry='6.6' transform='rotate(-13 11.6 10)' fill='%23fff'/%3E%3Cellipse cx='20.4' cy='10' rx='2.7' ry='6.6' transform='rotate(13 20.4 10)' fill='%23fff'/%3E%3Ccircle cx='16' cy='21' r='7.6' fill='%23fff'/%3E%3Ccircle cx='13.2' cy='20' r='1.15' fill='%235b4fe9'/%3E%3Ccircle cx='18.8' cy='20' r='1.15' fill='%235b4fe9'/%3E%3Cellipse cx='16' cy='23.4' rx='1.2' ry='1.05' fill='%235b4fe9'/%3E%3C/svg%3E">
+
+    <!-- 한글 가독성을 위한 Pretendard 웹폰트 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+    <!-- ===== Navigation ===== -->
+    <header class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo">이현조</div>
-            <ul class="nav-menu">
-                <li><a href="#intro">소개</a></li>
-                <li><a href="#experience">경력</a></li>
-                <li><a href="#education">학력</a></li>
-                <li><a href="#contact">연락처</a></li>
-            </ul>
+            <a class="logo" href="#top">
+                <span class="logo-mark" aria-hidden="true">
+                    <!-- 토끼 로고 — 흰 실루엣 + 보라색 눈/코 -->
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <ellipse cx="11.6" cy="10" rx="2.7" ry="6.6"
+                                 transform="rotate(-13 11.6 10)" fill="currentColor"/>
+                        <ellipse cx="20.4" cy="10" rx="2.7" ry="6.6"
+                                 transform="rotate(13 20.4 10)" fill="currentColor"/>
+                        <circle cx="16" cy="21" r="7.6" fill="currentColor"/>
+                        <circle cx="13.2" cy="20" r="1.15" fill="var(--violet)"/>
+                        <circle cx="18.8" cy="20" r="1.15" fill="var(--violet)"/>
+                        <path d="M16 22.3c-.72 0-1.2.48-1.2 1.05 0 .55.48 1 1.2 1s1.2-.45 1.2-1c0-.57-.48-1.05-1.2-1.05Z"
+                              fill="var(--violet)"/>
+                    </svg>
+                </span>
+                <span class="logo-text">조이현</span>
+            </a>
+
+            <nav class="nav-wrap" id="navPanel" aria-label="주요 메뉴">
+                <ul class="nav-menu">
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#experience">경력</a></li>
+                    <li><a href="#education">학력</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+
+            <a href="#contact" class="btn btn-primary btn-sm nav-cta">연락하기</a>
+
+            <button class="nav-toggle" id="navToggle" type="button"
+                    aria-controls="navPanel" aria-expanded="false" aria-label="메뉴 열기">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
         </div>
-    </nav>
+        <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="intro">
-        <div class="hero-container">
-            <div class="profile-image">
-                <img src="profile.jpg" alt="이현조">
+    <main id="main">
+        <!-- ===== Hero ===== -->
+        <section class="hero" id="top">
+            <!-- 배경 장식: 궤도선 + 점 -->
+            <div class="hero-decor" aria-hidden="true">
+                <span class="orbit orbit-1"></span>
+                <span class="orbit orbit-2"></span>
+                <span class="dot dot-1"></span>
+                <span class="dot dot-2"></span>
+                <span class="dot dot-3"></span>
+                <span class="dot dot-4"></span>
+                <span class="dot dot-5"></span>
             </div>
-            <div class="hero-content">
-                <div class="badge">IT 전략기획</div>
-                <h1>안녕하세요,<br><span class="name-highlight">이현조</span>입니다</h1>
-                <p class="subtitle">경희대학교 MBA 재학중<br>
-                IT 전략기획으로 기술과 사람을 잇고, 배우는 사람들을 모읍니다.</p>
-                
-                <div class="skills-badge">
-                    <span class="badge-item">IT 전략기획</span>
-                    <span class="badge-item">경영컨설팅</span>
-                    <span class="badge-item">비즈니스 분석</span>
-                    <span class="badge-item">MBA 재학</span>
-                </div>
 
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">연락하기</a>
-                    <a href="https://www.linkedin.com/in/%EC%9D%B4%ED%98%84-%EC%A1%B0-a1a350408/" 
-                       class="btn btn-secondary" target="_blank">LinkedIn 방문</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="container hero-inner">
+                <h1 class="hero-title reveal">
+                    안녕하세요, 저는 <span class="accent-text">조이현</span>입니다.<br>
+                    기술과 사람을 잇는 <span class="accent-text">IT 전략</span>을 그립니다
+                </h1>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        저는 기술과 사람을 잇는 IT 전략기획자입니다. 
-                        현재 경희대학교 경영대학원 경영컨설팅학과 MBA 과정을 재학 중이며, 
-                        IT 전략기획 분야에서 실무 경험을 쌓고 있습니다.
-                    </p>
-                    <p>
-                        배우는 사람들을 모으는 것을 좋아하며, 
-                        기술 혁신과 비즈니스 전략의 교집합에서 가치를 창출하는 것에 관심이 있습니다.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience" id="experience">
-        <div class="container">
-            <h2>Current Experience</h2>
-            <div class="experience-item">
-                <div class="exp-header">
-                    <h3>IT 전략기획</h3>
-                    <p class="exp-date">현재</p>
-                </div>
-                <p class="exp-description">
-                    조직의 IT 전략 수립 및 디지털 혁신 추진을 담당하고 있습니다.
-                    기술 트렌드 분석, 비즈니스 요구사항 도출, 전략적 의사결정 지원 등의 업무를 수행합니다.
+                <p class="hero-sub reveal">
+                    경희대학교 경영대학원에서 MBA 과정을 밟으며,
+                    기술 혁신과 비즈니스 전략이 만나는 지점에서 가치를 만듭니다.
                 </p>
-            </div>
-        </div>
-    </section>
 
-    <!-- Education Section -->
-    <section class="education" id="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="education-item">
-                <div class="edu-header">
+                <div class="hero-visual reveal">
+                    <!-- 플로팅 라벨 (좌) -->
+                    <div class="float-card float-left">
+                        <span class="float-title">IT 전략기획</span>
+                        <span class="float-meta">실무 진행 중</span>
+                    </div>
+
+                    <!-- 플로팅 라벨 (우) -->
+                    <div class="float-card float-right">
+                        <span class="float-title">경영컨설팅 MBA</span>
+                        <span class="float-meta">경희대학교 재학중</span>
+                    </div>
+
+                    <div class="hero-photo">
+                        <!-- profile.jpg 로드 실패 시 아래 대체 박스가 표시됩니다 -->
+                        <img src="profile.jpg" alt="조이현 프로필 사진" width="420" height="510"
+                             onerror="this.remove()">
+                        <div class="photo-placeholder" aria-hidden="true">조이현</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 블랙 밴드: 핵심 정보 + 퍼플 CTA ===== -->
+        <section class="band" aria-label="핵심 정보">
+            <div class="container">
+                <ul class="band-grid reveal">
+                    <li class="band-item">
+                        <span class="band-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M3 20h18M6 20V10m6 10V4m6 16v-7" stroke="currentColor"
+                                      stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="band-body">
+                            <span class="band-title">IT 전략기획</span>
+                            <span class="band-meta">전문 분야</span>
+                        </span>
+                    </li>
+                    <li class="band-item">
+                        <span class="band-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="m12 4 9 4.5-9 4.5-9-4.5L12 4Z" stroke="currentColor"
+                                      stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M6 11v4.5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V11"
+                                      stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="band-body">
+                            <span class="band-title">경희대 MBA</span>
+                            <span class="band-meta">경영대학원 재학중</span>
+                        </span>
+                    </li>
+                    <li class="band-item">
+                        <span class="band-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 7.5v5l3 2" stroke="currentColor" stroke-width="2"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="band-body">
+                            <span class="band-title">경영컨설팅학과</span>
+                            <span class="band-meta">전공</span>
+                        </span>
+                    </li>
+                    <li class="band-item">
+                        <span class="band-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M13 3 5 13.5h5.5L11 21l8-10.5h-5.5L13 3Z" stroke="currentColor"
+                                      stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="band-body">
+                            <span class="band-title">디지털 혁신</span>
+                            <span class="band-meta">관심 영역</span>
+                        </span>
+                    </li>
+                </ul>
+
+                <div class="cta-card reveal">
+                    <div class="cta-copy">
+                        <h2>함께 만들어갈 기회를 찾고 있습니다</h2>
+                        <p>전략 기획, 디지털 혁신, 그리고 함께 배우는 일이라면 언제든 환영입니다.</p>
+                    </div>
+                    <div class="cta-actions">
+                        <a href="#contact" class="btn btn-light">
+                            연락하기
+                            <svg class="btn-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.9"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== About ===== -->
+        <section class="section about" id="about">
+            <div class="container about-grid">
+                <div class="about-visual reveal">
+                    <div class="quote-card">
+                        <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+                        <p class="quote-text">
+                            기술 그 자체보다, 그 기술이 조직 안에서
+                            어떻게 자리 잡는지에 관심이 많습니다.
+                        </p>
+                        <p class="quote-by">조이현 · IT 전략기획</p>
+                    </div>
+                </div>
+
+                <div class="about-body reveal">
+                    <p class="section-eyebrow">About me</p>
+                    <h2 class="section-title">
+                        기술과 사람을 잇는 <span class="accent-text">IT 전략기획자</span>
+                    </h2>
+                    <p class="section-desc">
+                        현재 경희대학교 경영대학원 경영컨설팅학과 MBA 과정을 재학 중이며,
+                        IT 전략기획 분야에서 실무 경험을 쌓고 있습니다.
+                        배우는 사람들을 모으는 것을 좋아하며, 기술 혁신과 비즈니스 전략의
+                        교집합에서 가치를 창출하는 것에 관심이 있습니다.
+                    </p>
+
+                    <ul class="accordion" id="accordion">
+                        <li class="acc-item">
+                            <button class="acc-head" type="button" aria-expanded="false">
+                                <span class="acc-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="acc-label">My Vision</span>
+                            </button>
+                            <div class="acc-panel">
+                                <p>
+                                    기술이 조직의 언어로 번역될 때 비로소 혁신이 시작된다고 믿습니다.
+                                    현장의 요구와 기술의 가능성 사이에서 실행 가능한 전략을 그리는 것이 목표입니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="acc-item">
+                            <button class="acc-head" type="button" aria-expanded="false">
+                                <span class="acc-arrow" aria-hidden="true">
+                                    <svg viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="acc-label">My Mission</span>
+                            </button>
+                            <div class="acc-panel">
+                                <p>
+                                    기술 트렌드를 분석하고 비즈니스 요구사항을 구조화해,
+                                    의사결정이 근거 위에서 이뤄지도록 돕습니다.
+                                    그리고 그 과정을 함께 배우는 사람들과 나눕니다.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 강점 (레퍼런스의 카드 그리드 리듬) ===== -->
+        <section class="section strengths" aria-labelledby="strengthsTitle">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="section-eyebrow">What I do</p>
+                    <h2 class="section-title" id="strengthsTitle">
+                        제가 <span class="accent-text">집중하는</span> 일
+                    </h2>
+                </header>
+
+                <ul class="card-grid">
+                    <li class="feature-card reveal">
+                        <span class="feature-num" aria-hidden="true">01</span>
+                        <h3>IT 전략 수립</h3>
+                        <p>조직의 방향에 맞는 IT 전략을 설계하고, 실행 로드맵으로 구체화합니다.</p>
+                    </li>
+                    <li class="feature-card feature-card-accent reveal">
+                        <span class="feature-num" aria-hidden="true">02</span>
+                        <h3>기술 트렌드 분석</h3>
+                        <p>새로운 기술이 우리 조직에 어떤 의미인지 해석하고 도입 우선순위를 제안합니다.</p>
+                    </li>
+                    <li class="feature-card reveal">
+                        <span class="feature-num" aria-hidden="true">03</span>
+                        <h3>요구사항 도출</h3>
+                        <p>현업의 언어를 구조화된 요구사항으로 옮겨 프로젝트의 출발점을 만듭니다.</p>
+                    </li>
+                    <li class="feature-card reveal">
+                        <span class="feature-num" aria-hidden="true">04</span>
+                        <h3>의사결정 지원</h3>
+                        <p>선택지를 비교 가능한 형태로 정리해 근거 있는 결정을 돕습니다.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Experience ===== -->
+        <section class="section experience" id="experience">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="section-eyebrow">Experience</p>
+                    <h2 class="section-title">지금까지의 <span class="accent-text">경력</span></h2>
+                </header>
+
+                <ol class="timeline">
+                    <li class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true"></div>
+                        <article class="exp-card">
+                            <div class="exp-header">
+                                <h3>IT 전략기획</h3>
+                                <span class="chip chip-live">현재</span>
+                            </div>
+                            <p class="exp-desc">
+                                조직의 IT 전략 수립 및 디지털 혁신 추진을 담당하고 있습니다.
+                                기술 트렌드 분석, 비즈니스 요구사항 도출, 전략적 의사결정 지원 등의 업무를 수행합니다.
+                            </p>
+                            <ul class="tag-list">
+                                <li>전략 수립</li>
+                                <li>기술 트렌드 분석</li>
+                                <li>요구사항 도출</li>
+                                <li>의사결정 지원</li>
+                            </ul>
+                        </article>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===== Education ===== -->
+        <section class="section education" id="education">
+            <div class="container">
+                <header class="section-head section-head-center reveal">
+                    <p class="section-eyebrow">Education</p>
+                    <h2 class="section-title">학력 및 <span class="accent-text">학업</span></h2>
+                </header>
+
+                <article class="edu-card reveal">
+                    <span class="chip chip-on-accent">재학중</span>
                     <h3>경희대학교 경영대학원</h3>
                     <p class="edu-major">경영컨설팅학과 MBA</p>
-                    <p class="edu-status">재학중</p>
+                    <p class="edu-desc">
+                        경영 전략, 조직 설계, 디지털 혁신 등
+                        기업 경영의 핵심 주제들을 학습하고 있습니다.
+                    </p>
+                    <ul class="edu-points">
+                        <li>경영 전략</li>
+                        <li>조직 설계</li>
+                        <li>디지털 혁신</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== Contact ===== -->
+        <section class="section contact" id="contact">
+            <div class="container">
+                <header class="section-head section-head-center reveal">
+                    <p class="section-eyebrow">Contact</p>
+                    <h2 class="section-title">함께 <span class="accent-text">이야기</span>해요</h2>
+                    <p class="section-desc section-desc-center">
+                        기술 혁신, 전략 기획, 그리고 함께 배우는 것에 관심이 있으시다면 편하게 연락 주세요.
+                    </p>
+                </header>
+
+                <div class="contact-links reveal">
+                    <a href="https://www.linkedin.com/in/%EC%9D%B4%ED%98%84-%EC%A1%B0-a1a350408/"
+                       class="contact-link" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.4 8.4h4.2V24H.4V8.4zm7.6 0h4v2.1h.06c.56-1.06 1.93-2.18 3.97-2.18 4.25 0 5.03 2.8 5.03 6.43V24h-4.2v-7.4c0-1.77-.03-4.04-2.46-4.04-2.47 0-2.85 1.93-2.85 3.92V24H8V8.4z"/>
+                            </svg>
+                        </span>
+                        <span class="contact-body">
+                            <span class="contact-label">LinkedIn</span>
+                            <span class="contact-value">프로필 방문하기</span>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.9"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
+
+                    <!-- TODO: your-email@example.com 을 실제 이메일 주소로 바꿔주세요 -->
+                    <a href="mailto:your-email@example.com" class="contact-link">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="4.5" width="20" height="15" rx="2.5"
+                                      stroke="currentColor" stroke-width="1.9"/>
+                                <path d="m3 6.5 8.4 6a1 1 0 0 0 1.2 0l8.4-6"
+                                      stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        <span class="contact-body">
+                            <span class="contact-label">Email</span>
+                            <span class="contact-value">메일 보내기</span>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.9"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </a>
                 </div>
-                <p class="edu-description">
-                    경영 전략, 조직 설계, 디지털 혁신 등 
-                    기업 경영의 핵심 주제들을 학습하고 있습니다.
-                </p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p class="contact-intro">기술 혁신, 전략 기획, 그리고 함께 배우는 것에 관심이 있으시다면 연락주세요!</p>
-            
-            <div class="contact-links">
-                <a href="https://www.linkedin.com/in/%EC%9D%B4%ED%98%84-%EC%A1%B0-a1a350408/" 
-                   class="contact-link" target="_blank">
-                    <span class="icon">in</span>
-                    <span>LinkedIn</span>
-                </a>
-                <a href="mailto:your-email@example.com" class="contact-link">
-                    <span class="icon">@</span>
-                    <span>Email</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
+    <!-- ===== Footer ===== -->
     <footer class="footer">
-        <p>&copy; 2026 이현조. All rights reserved.</p>
+        <div class="container footer-inner">
+            <a class="logo logo-light" href="#top">
+                <span class="logo-mark" aria-hidden="true">
+                    <!-- 토끼 로고 — 흰 실루엣 + 보라색 눈/코 -->
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <ellipse cx="11.6" cy="10" rx="2.7" ry="6.6"
+                                 transform="rotate(-13 11.6 10)" fill="currentColor"/>
+                        <ellipse cx="20.4" cy="10" rx="2.7" ry="6.6"
+                                 transform="rotate(13 20.4 10)" fill="currentColor"/>
+                        <circle cx="16" cy="21" r="7.6" fill="currentColor"/>
+                        <circle cx="13.2" cy="20" r="1.15" fill="var(--violet)"/>
+                        <circle cx="18.8" cy="20" r="1.15" fill="var(--violet)"/>
+                        <path d="M16 22.3c-.72 0-1.2.48-1.2 1.05 0 .55.48 1 1.2 1s1.2-.45 1.2-1c0-.57-.48-1.05-1.2-1.05Z"
+                              fill="var(--violet)"/>
+                    </svg>
+                </span>
+                <span class="logo-text">조이현</span>
+            </a>
+
+            <nav aria-label="푸터 메뉴">
+                <ul class="footer-menu">
+                    <li><a href="#about">소개</a></li>
+                    <li><a href="#experience">경력</a></li>
+                    <li><a href="#education">학력</a></li>
+                    <li><a href="#contact">연락처</a></li>
+                </ul>
+            </nav>
+
+            <p class="footer-copy">&copy; 2026 조이현. All rights reserved.</p>
+        </div>
     </footer>
+
+    <script src="main.js" defer></script>
 </body>
 </html>
