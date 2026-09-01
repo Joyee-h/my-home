@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Timezone Digital Clock</title>
+    <link rel="stylesheet" href="clock-styles.css">
+</head>
+<body>
+    <div class="clock-container">
+        <h1>Global Time Clock</h1>
+        <p class="subtitle">Real-time displays across different time zones</p>
+        
+        <div class="clocks-grid">
+            <!-- New York (EST) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>New York</h2>
+                    <p class="timezone-code">EST / EDT</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-newyork">--:--:--</span>
+                    <span class="period" id="period-newyork">AM</span>
+                </div>
+                <p class="timezone-offset">UTC-5 / UTC-4</p>
+                <div class="clock-analog" id="analog-newyork">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-newyork"></div>
+                        <div class="minute-hand" id="minute-newyork"></div>
+                        <div class="second-hand" id="second-newyork"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- London (GMT) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>London</h2>
+                    <p class="timezone-code">GMT / BST</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-london">--:--:--</span>
+                    <span class="period" id="period-london">AM</span>
+                </div>
+                <p class="timezone-offset">UTC+0 / UTC+1</p>
+                <div class="clock-analog" id="analog-london">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-london"></div>
+                        <div class="minute-hand" id="minute-london"></div>
+                        <div class="second-hand" id="second-london"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tokyo (JST) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>Tokyo</h2>
+                    <p class="timezone-code">JST</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-tokyo">--:--:--</span>
+                    <span class="period" id="period-tokyo">AM</span>
+                </div>
+                <p class="timezone-offset">UTC+9</p>
+                <div class="clock-analog" id="analog-tokyo">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-tokyo"></div>
+                        <div class="minute-hand" id="minute-tokyo"></div>
+                        <div class="second-hand" id="second-tokyo"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sydney (AEDT) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>Sydney</h2>
+                    <p class="timezone-code">AEDT / AEST</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-sydney">--:--:--</span>
+                    <span class="period" id="period-sydney">AM</span>
+                </div>
+                <p class="timezone-offset">UTC+11 / UTC+10</p>
+                <div class="clock-analog" id="analog-sydney">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-sydney"></div>
+                        <div class="minute-hand" id="minute-sydney"></div>
+                        <div class="second-hand" id="second-sydney"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dubai (GST) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>Dubai</h2>
+                    <p class="timezone-code">GST</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-dubai">--:--:--</span>
+                    <span class="period" id="period-dubai">AM</span>
+                </div>
+                <p class="timezone-offset">UTC+4</p>
+                <div class="clock-analog" id="analog-dubai">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-dubai"></div>
+                        <div class="minute-hand" id="minute-dubai"></div>
+                        <div class="second-hand" id="second-dubai"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Singapore (SGT) -->
+            <div class="clock-card">
+                <div class="timezone-header">
+                    <h2>Singapore</h2>
+                    <p class="timezone-code">SGT</p>
+                </div>
+                <div class="digital-display">
+                    <span class="time" id="time-singapore">--:--:--</span>
+                    <span class="period" id="period-singapore">AM</span>
+                </div>
+                <p class="timezone-offset">UTC+8</p>
+                <div class="clock-analog" id="analog-singapore">
+                    <div class="clock-face">
+                        <div class="hour-hand" id="hour-singapore"></div>
+                        <div class="minute-hand" id="minute-singapore"></div>
+                        <div class="second-hand" id="second-singapore"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="toggle-format" class="btn-format">24-Hour Format</button>
+            <button id="toggle-analog" class="btn-analog">Hide Analog Clocks</button>
+        </div>
+    </div>
+
+    <script src="clock-script.js"></script>
+</body>
+</html>
