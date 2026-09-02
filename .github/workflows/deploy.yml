@@ -1,0 +1,44 @@
+# main 브랜치에 푸시되면 GitHub Pages 로 자동 배포합니다.
+# 빌드 도구가 필요 없는 정적 사이트라 저장소 내용을 그대로 올립니다.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Actions 탭에서 수동 실행도 가능하게
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포가 겹칠 때 이전 실행을 취소하지 않고 순서대로 처리
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Pages 설정 불러오기
+        uses: actions/configure-pages@v5
+
+      - name: 배포할 파일 묶기
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 정적 사이트이므로 저장소 루트를 그대로 배포
+          path: .
+
+      - name: GitHub Pages 에 배포
+        id: deployment
+        uses: actions/deploy-pages@v4
