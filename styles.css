@@ -1,5 +1,5 @@
 /* =============================================================
-   이현조 — 개인 포트폴리오
+   조이현 — 개인 포트폴리오
    토큰 → 기본 → 네비 → 히어로 → 밴드 → 섹션 → 푸터 → 반응형
    ============================================================= */
 
@@ -894,6 +894,208 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 20px); }
 
 /* JS 미동작 환경에서도 내용이 보이도록 */
 .no-js .reveal { opacity: 1; transform: none; }
+
+/* ---------- 14-b. 성과 지표 밴드 ---------- */
+.band-stat {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.stat-num {
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.15rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+.stat-plus {
+    color: var(--violet);
+    margin-left: 1px;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.58);
+}
+
+/* ---------- 14-c. 대표 성과 (케이스 카드) ---------- */
+.work { background: var(--white); }
+
+.case-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 0.75rem + 1.5vw, 2rem);
+}
+
+.case-card {
+    padding: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease),
+                border-color 0.3s var(--ease);
+}
+
+.case-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--violet);
+    box-shadow: var(--shadow-md);
+}
+
+.case-head {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.case-num {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 0.6rem;
+}
+
+.case-head h3 {
+    font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem);
+    margin-bottom: 0.35rem;
+}
+
+.case-meta {
+    font-size: var(--fs-small);
+    color: var(--ink-3);
+}
+
+/* 문제 / 접근 / 결과 3단 구성 */
+.case-row {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.7rem;
+}
+
+.case-row + .case-row { border-top: 1px dashed var(--line); }
+
+.case-row dt {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--violet);
+    padding-top: 0.15rem;
+}
+
+.case-row dd {
+    color: var(--ink-2);
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.case-results {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.case-results li {
+    position: relative;
+    padding-left: 1.1rem;
+}
+
+.case-results li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--violet);
+}
+
+.case-results strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.case-card .tag-list { margin-top: 1.35rem; }
+
+/* ---------- 14-d. 경력 카드 보조 정보 ---------- */
+.exp-role {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--violet);
+    margin-bottom: 0.7rem;
+}
+
+/* 기간 표시용 기본 chip (chip-live 가 아닌 경우) */
+.chip {
+    background: var(--violet-soft);
+    color: var(--violet);
+    white-space: nowrap;
+}
+
+.chip-live { background: rgba(18, 184, 134, 0.12); color: var(--live); }
+.chip-on-accent { background: rgba(255, 255, 255, 0.22); color: #fff; }
+
+/* ---------- 14-e. 학력 · 수상 · 해외경험 ---------- */
+.cred-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(1.25rem, 0.75rem + 1.5vw, 2rem);
+    margin-top: clamp(2rem, 1.25rem + 2vw, 3rem);
+}
+
+.cred-block {
+    padding: clamp(1.35rem, 1rem + 1.2vw, 1.85rem);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--white);
+}
+
+.cred-title {
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--violet);
+    display: inline-block;
+}
+
+.cred-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.cred-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.cred-date {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--violet);
+}
+
+.cred-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.45;
+}
+
+.cred-meta {
+    font-size: var(--fs-small);
+    color: var(--ink-3);
+    line-height: 1.5;
+}
 
 /* ---------- 15. 반응형 ---------- */
 @media (max-width: 1024px) {
