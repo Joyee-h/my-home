@@ -38,6 +38,10 @@
     var navbar = document.getElementById('navbar');
     var ticking = false;
 
+    // 히어로 사진 패럴랙스 — 프레임보다 사진이 천천히 움직이게
+    var heroPhoto = document.querySelector('.hero-photo img');
+    var hero = document.querySelector('.hero');
+
     function onScroll() {
         var doc = document.documentElement;
         var scrollable = doc.scrollHeight - window.innerHeight;
@@ -49,6 +53,18 @@
         if (navbar) {
             navbar.classList.toggle('is-scrolled', window.scrollY > 8);
         }
+
+        // 히어로가 화면에 걸쳐 있는 동안에만 계산 (벗어나면 비용 0)
+        if (heroPhoto && hero && !prefersReduced) {
+            var rect = hero.getBoundingClientRect();
+            if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                // 0(최상단) → 1(히어로가 위로 완전히 빠짐)
+                var p = Math.min(Math.max(-rect.top / (rect.height || 1), 0), 1);
+                // scale 로 확보한 여백(6%) 안에서만 이동해 빈틈이 생기지 않음
+                heroPhoto.style.transform = 'scale(1.06) translate3d(0,' + (p * -22).toFixed(2) + 'px,0)';
+            }
+        }
+
         ticking = false;
     }
 
@@ -147,5 +163,52 @@
     if (firstAcc) {
         firstAcc.classList.add('is-open');
         firstAcc.querySelector('.acc-head').setAttribute('aria-expanded', 'true');
+    }
+
+    /* ---------- 6. 성과 지표 숫자 카운트업 ---------- */
+    var counters = Array.prototype.slice.call(document.querySelectorAll('.count[data-to]'));
+
+    function formatNum(value, useComma) {
+        return useComma ? value.toLocaleString('ko-KR') : String(value);
+    }
+
+    function runCount(el) {
+        var target = parseInt(el.getAttribute('data-to'), 10) || 0;
+        var useComma = el.getAttribute('data-comma') === '1';
+        var duration = 1400;
+        var start = null;
+
+        function step(now) {
+            if (start === null) start = now;
+            var t = Math.min((now - start) / duration, 1);
+            // easeOutExpo — 빠르게 올라갔다 부드럽게 멈춤
+            var eased = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            el.textContent = formatNum(Math.round(target * eased), useComma);
+            if (t < 1) window.requestAnimationFrame(step);
+        }
+
+        window.requestAnimationFrame(step);
+    }
+
+    if (counters.length) {
+        if (prefersReduced || !('IntersectionObserver' in window)) {
+            // 모션 최소화 설정이면 최종값을 바로 표시
+            counters.forEach(function (el) {
+                el.textContent = formatNum(
+                    parseInt(el.getAttribute('data-to'), 10) || 0,
+                    el.getAttribute('data-comma') === '1'
+                );
+            });
+        } else {
+            var countObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    runCount(entry.target);
+                    countObserver.unobserve(entry.target);
+                });
+            }, { threshold: 0.6 });
+
+            counters.forEach(function (el) { countObserver.observe(el); });
+        }
     }
 })();

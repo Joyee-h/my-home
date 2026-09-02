@@ -1452,3 +1452,84 @@ button:focus-visible {
 @media (max-width: 900px) {
     .lab-card-wide { grid-column: span 1; }
 }
+
+/* =============================================================
+   18. 스크롤 모션 (패럴랙스 · 카운트업 · 순차 등장)
+   모두 prefers-reduced-motion 을 존중하며, 미지원 브라우저에서는
+   정적으로 보일 뿐 레이아웃이 깨지지 않습니다.
+   ============================================================= */
+
+/* ---------- 숫자 카운트업 ---------- */
+.stat-num {
+    /* 숫자가 바뀔 때 폭이 흔들리지 않도록 고정폭 숫자 사용 */
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+}
+
+/* ---------- 히어로 사진 패럴랙스 ---------- */
+/* 6% 확대해 둔 여백 안에서만 움직이므로 프레임에 빈틈이 생기지 않음 */
+.hero-photo img {
+    transform: scale(1.06);
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    /* ---------- 배경 장식 패럴랙스 (CSS 스크롤 연동) ---------- */
+    /* animation-timeline 미지원 브라우저(Safari·Firefox)에서는
+       @supports 블록 전체가 무시되어 장식이 정지 상태로 보입니다. */
+    @supports (animation-timeline: scroll()) {
+        .orbit-1,
+        .orbit-2,
+        .dot {
+            animation-duration: auto;
+            animation-timing-function: linear;
+            animation-fill-mode: both;
+            animation-timeline: scroll(root block);
+            animation-range: 0 90vh;
+            will-change: transform;
+        }
+
+        .orbit-1 { animation-name: driftOrbitSlow; }
+        .orbit-2 { animation-name: driftOrbitFast; }
+
+        .dot-1,
+        .dot-3,
+        .dot-5 { animation-name: driftDotUp; }
+
+        .dot-2,
+        .dot-4 { animation-name: driftDotDown; }
+    }
+
+    /* ---------- 케이스 카드: 문제 → 접근 → 결과 순차 등장 ---------- */
+    .case-card .case-row { opacity: 0; }
+
+    .case-card.is-visible .case-row {
+        animation: caseRowIn 0.55s var(--ease) both;
+    }
+
+    .case-card.is-visible .case-row:nth-child(1) { animation-delay: 0.10s; }
+    .case-card.is-visible .case-row:nth-child(2) { animation-delay: 0.22s; }
+    .case-card.is-visible .case-row:nth-child(3) { animation-delay: 0.34s; }
+}
+
+/* 궤도선은 translateX(-50%) 로 가운데 정렬돼 있어 함께 유지해야 함 */
+@keyframes driftOrbitSlow {
+    to { transform: translateX(-50%) translateY(40px); }
+}
+
+@keyframes driftOrbitFast {
+    to { transform: translateX(-50%) translateY(80px); }
+}
+
+@keyframes driftDotUp {
+    to { transform: translateY(-46px); }
+}
+
+@keyframes driftDotDown {
+    to { transform: translateY(34px); }
+}
+
+@keyframes caseRowIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
